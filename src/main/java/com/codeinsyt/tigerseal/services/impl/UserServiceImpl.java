@@ -4,8 +4,11 @@ import com.codeinsyt.tigerseal.models.User;
 import com.codeinsyt.tigerseal.repositories.UserRepository;
 import com.codeinsyt.tigerseal.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
 
@@ -16,8 +19,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return null;
+
+        try{
+            return this.userRepository.findByUserName(username);
+        }catch(Exception e){
+            return null;
+        }
+
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = findByUsername(username);
+        if (user == null){
+            throw new UsernameNotFoundException(username);
+        }
+
+        return new UserDetailsImpl(user);
+
+    }
 }

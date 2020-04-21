@@ -20,10 +20,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public User findByUsernameAndPassword(String username, String password) {
 
         try{
-            return this.userRepository.findByUsername(username);
+            return this.userRepository.findByUsernameAndPassword(username, password);
         }catch(Exception e){
             return null;
         }
@@ -31,15 +31,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = findByUsername(username);
+    public UserDetails loadUserByUsername(String username, String password) throws UsernameNotFoundException {
+
+        User user = findByUsernameAndPassword(username, password);
         if (user == null){
             throw new UsernameNotFoundException(username);
         }
-
         return new UserDetailsImpl(user);
 
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

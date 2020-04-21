@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
@@ -21,7 +23,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User findByUsername(String username) {
 
         try{
-            return this.userRepository.findByUserName(username);
+            return this.userRepository.findByUsername(username);
         }catch(Exception e){
             return null;
         }

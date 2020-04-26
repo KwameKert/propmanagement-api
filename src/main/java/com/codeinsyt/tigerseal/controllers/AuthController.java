@@ -20,13 +20,9 @@ public class AuthController {
 
 
     @PostMapping("login")
-    public ResponseEntity<?> testUser(@RequestBody AuthenticationRequest authenticationRequest){
+    public ResponseEntity<?> testUser(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
-        String response = "hello";
-        final UserDetails userDetails = authService.loadUserByUsername(authenticationRequest.getUserName(),authenticationRequest.getPassword());
-        System.out.println(userDetails);
-
-        return new ResponseEntity<>(userDetails, HttpStatus.OK);
+        return new ResponseEntity<>(this.authService.loginUser(authenticationRequest.getUserName(),authenticationRequest.getPassword()), HttpStatus.OK);
 
     }
 

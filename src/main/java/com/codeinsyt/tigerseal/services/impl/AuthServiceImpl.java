@@ -53,7 +53,12 @@ public class AuthServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        User user = findByUsername(username);
+        if (user == null){
+            throw new UsernameNotFoundException(username);
+        }
+        return new AuthDetailsImpl(user);
+
     }
 
 
@@ -66,7 +71,7 @@ public class AuthServiceImpl implements UserService, UserDetailsService {
 
         if(userDetails.getUsername() != null){
             String jwt = getJwt(userDetails);
-            result.put("data", jwt);
+            result.put("token", jwt);
             result.put("message","User authenticated");
             result.put("status", HttpStatus.OK);
         }else{

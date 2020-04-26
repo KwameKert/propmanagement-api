@@ -10,11 +10,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserDetailsImpl implements UserDetails {
+public class AuthDetailsImpl implements UserDetails {
 
     private User user;
 
-    public UserDetailsImpl(User user) {
+    public AuthDetailsImpl(User user) {
         this.user = user;
     }
 

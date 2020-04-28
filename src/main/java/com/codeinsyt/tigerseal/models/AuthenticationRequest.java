@@ -4,7 +4,7 @@ package com.codeinsyt.tigerseal.models;
 
 public class AuthenticationRequest {
 
-    private String userName;
+    private String username;
     private String password;
 
 
@@ -12,12 +12,12 @@ public class AuthenticationRequest {
     public AuthenticationRequest() {
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -33,7 +33,7 @@ public class AuthenticationRequest {
     @Override
     public String toString() {
         return "AuthenticationRequest{" +
-                "userName='" + userName + '\'' +
+                "userName='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

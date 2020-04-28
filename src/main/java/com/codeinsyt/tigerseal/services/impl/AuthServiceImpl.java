@@ -43,6 +43,7 @@ public class AuthServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username, String password) throws UsernameNotFoundException {
 
         User user = findByUsernameAndPassword(username, password);
+
         if (user == null){
             throw new UsernameNotFoundException(username);
         }
@@ -64,10 +65,10 @@ public class AuthServiceImpl implements UserService, UserDetailsService {
 
     public HashMap<String, Object> loginUser(String username,String password) throws Exception {
 
-
-
         HashMap<String, Object> result = new HashMap<>();
+
         final UserDetails userDetails = loadUserByUsername(username,password);
+        System.out.println(userDetails.getAuthorities());
 
         if(userDetails.getUsername() != null){
             String jwt = getJwt(userDetails);

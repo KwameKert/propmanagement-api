@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="app_property")
+@Table(name="app_properties")
 public class Property {
 
     @Id

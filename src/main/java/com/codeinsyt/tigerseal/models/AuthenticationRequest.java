@@ -2,6 +2,8 @@ package com.codeinsyt.tigerseal.models;
 
 //import com.codeinsyt.tigerseal.utils.EncryptPassword;
 
+import com.codeinsyt.tigerseal.utils.EncryptPassword;
+
 public class AuthenticationRequest {
 
     private String username;
@@ -26,8 +28,8 @@ public class AuthenticationRequest {
 
     public void setPassword(String password)  {
 
-        this.password = password;
-       // this.password = EncryptPassword.hashPassword(password);
+       // this.password = password;
+       this.password = EncryptPassword.hashPassword(password);
     }
 
     @Override

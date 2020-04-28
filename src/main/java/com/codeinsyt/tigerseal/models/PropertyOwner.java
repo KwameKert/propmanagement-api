@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="app_property_owner")
+@Table(name="app_property_owners")
 public class PropertyOwner {
 
     @Id

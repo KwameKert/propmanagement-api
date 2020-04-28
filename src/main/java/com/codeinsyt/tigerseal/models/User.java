@@ -1,5 +1,7 @@
 package com.codeinsyt.tigerseal.models;
 
+import com.codeinsyt.tigerseal.utils.EncryptPassword;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="app_user")
+@Table(name="app_users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +23,7 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String email;
+
 
     @Column(nullable = false)
     private String password;
@@ -90,7 +93,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = EncryptPassword.hashPassword(password);
     }
 
     public String getFullName() {
@@ -132,5 +135,22 @@ public class User {
 
     public void setProperty_owners(List<PropertyOwner> property_owners) {
         this.property_owners = property_owners;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", stat='" + stat + '\'' +
+                ", property_owners=" + property_owners +
+                ", roles=" + roles +
+                '}';
     }
 }

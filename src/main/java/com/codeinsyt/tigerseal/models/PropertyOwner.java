@@ -1,5 +1,7 @@
 package com.codeinsyt.tigerseal.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +19,11 @@ public class PropertyOwner {
 
     @OneToMany(mappedBy = "property_owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Property> properties;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="collector_id", nullable= false)
+    @JsonIgnore
+    private User collector;
 
     public PropertyOwner() {
     }

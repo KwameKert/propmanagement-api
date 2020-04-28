@@ -68,7 +68,6 @@ public class AuthServiceImpl implements UserService, UserDetailsService {
         HashMap<String, Object> result = new HashMap<>();
 
         final UserDetails userDetails = loadUserByUsername(username,password);
-        System.out.println(userDetails.getAuthorities());
 
         if(userDetails.getUsername() != null){
             String jwt = getJwt(userDetails);

@@ -26,6 +26,8 @@ public class Property {
 
     private Long longitude;
 
+    private int value;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="property_owner_id", nullable= false)
     @JsonIgnore
@@ -139,5 +141,14 @@ public class Property {
 
     public void setPropertyOwner(PropertyOwner propertyOwner) {
         this.propertyOwner = propertyOwner;
+    }
+
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

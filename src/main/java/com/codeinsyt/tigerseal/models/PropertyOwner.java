@@ -1,8 +1,10 @@
 package com.codeinsyt.tigerseal.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,6 +26,16 @@ public class PropertyOwner {
     @JoinColumn(name="collector_id", nullable= false)
     @JsonIgnore
     private User collector;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Date createdAt;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Date updatedAt;
+
+
 
     public PropertyOwner() {
     }
@@ -58,5 +70,30 @@ public class PropertyOwner {
 
     public void setProperties(List<Property> properties) {
         this.properties = properties;
+    }
+
+
+    public User getCollector() {
+        return collector;
+    }
+
+    public void setCollector(User collector) {
+        this.collector = collector;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

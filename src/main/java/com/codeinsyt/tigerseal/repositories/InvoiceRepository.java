@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
@@ -15,4 +16,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Query("UPDATE Invoice e SET e.stat = ?2 WHERE e.id = ?1")
     @Transactional
     int softDelete(Long id, String status);
+
+    List<Invoice> findAllByStatOrderByIdAsc(String status);
 }

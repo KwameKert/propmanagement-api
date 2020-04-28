@@ -21,6 +21,7 @@ public class Transaction {
     @JsonIgnore
     private Property property;
 
+    private String stat;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -76,6 +77,13 @@ public class Transaction {
         this.updatedAt = updatedAt;
     }
 
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
 
     @Override
     public String toString() {

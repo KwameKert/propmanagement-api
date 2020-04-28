@@ -22,6 +22,8 @@ public class Property {
 
     private Float rate;
 
+    private String stat;
+
     private Long latitude;
 
     private Long longitude;
@@ -118,6 +120,14 @@ public class Property {
         this.updatedAt = updatedAt;
     }
 
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
 
     @Override
     public String toString() {

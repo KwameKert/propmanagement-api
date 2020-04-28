@@ -19,6 +19,8 @@ public class Invoice {
 
     private int price;
 
+    private String stat;
+
     @Lob
     private String notes;
 
@@ -83,6 +85,14 @@ public class Invoice {
         this.updatedAt = updatedAt;
     }
 
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
 
     @Override
     public String toString() {

@@ -14,6 +14,8 @@ public class Audit {
 
     private String activity;
 
+    private String stat;
+
     private String details;
 
     @CreationTimestamp
@@ -66,5 +68,13 @@ public class Audit {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 }

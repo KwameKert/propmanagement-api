@@ -27,6 +27,8 @@ public class PropertyOwner {
     @JsonIgnore
     private User user;
 
+    private String stat;
+
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -96,5 +98,14 @@ public class PropertyOwner {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 }

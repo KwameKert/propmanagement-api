@@ -26,6 +26,11 @@ public class Property {
 
     private Long longitude;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="property_owner_id", nullable= false)
+    @JsonIgnore
+    private PropertyOwner propertyOwner;
+
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -125,5 +130,14 @@ public class Property {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+
+    public PropertyOwner getPropertyOwner() {
+        return propertyOwner;
+    }
+
+    public void setPropertyOwner(PropertyOwner propertyOwner) {
+        this.propertyOwner = propertyOwner;
     }
 }

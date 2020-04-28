@@ -1,6 +1,7 @@
 package com.codeinsyt.tigerseal.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="app_property_owner")
@@ -13,6 +14,9 @@ public class PropertyOwner {
     private String username;
 
     private String password;
+
+    @OneToMany(mappedBy = "property_owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Property> properties;
 
     public PropertyOwner() {
     }
@@ -39,5 +43,13 @@ public class PropertyOwner {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<Property> properties) {
+        this.properties = properties;
     }
 }

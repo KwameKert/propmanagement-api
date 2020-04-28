@@ -34,6 +34,9 @@ public class User {
     @UpdateTimestamp
     private Date updatedAt;
 
+
+    private String stat;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PropertyOwner> property_owners;
 
@@ -48,6 +51,14 @@ public class User {
     private Set<Role>  roles  = new HashSet<Role>();
 
     public User() {
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 
     public Long getId() {

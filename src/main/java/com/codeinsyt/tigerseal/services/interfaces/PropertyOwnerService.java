@@ -1,8 +1,10 @@
 package com.codeinsyt.tigerseal.services.interfaces;
 
 import com.codeinsyt.tigerseal.models.PropertyOwner;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+
 
 public interface PropertyOwnerService {
 

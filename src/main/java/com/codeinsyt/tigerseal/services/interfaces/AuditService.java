@@ -1,6 +1,7 @@
 package com.codeinsyt.tigerseal.services.interfaces;
 
 import com.codeinsyt.tigerseal.models.Audit;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 

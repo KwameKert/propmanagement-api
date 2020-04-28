@@ -2,9 +2,11 @@ package com.codeinsyt.tigerseal.services.interfaces;
 
 
 import com.codeinsyt.tigerseal.models.User;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+@Service
 public interface UserService {
 
 

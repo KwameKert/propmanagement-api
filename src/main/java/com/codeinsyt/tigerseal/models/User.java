@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,6 +33,9 @@ public class User {
 
     @UpdateTimestamp
     private Date updatedAt;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PropertyOwner> property_owners;
 
 
 
@@ -108,5 +112,14 @@ public class User {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+
+    public List<PropertyOwner> getProperty_owners() {
+        return property_owners;
+    }
+
+    public void setProperty_owners(List<PropertyOwner> property_owners) {
+        this.property_owners = property_owners;
     }
 }

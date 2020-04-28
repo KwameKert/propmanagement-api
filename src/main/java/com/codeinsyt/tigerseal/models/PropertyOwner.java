@@ -19,13 +19,13 @@ public class PropertyOwner {
 
     private String password;
 
-    @OneToMany(mappedBy = "property_owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "propertyOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Property> properties;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="collector_id", nullable= false)
+    @JoinColumn(name="user_id", nullable= false)
     @JsonIgnore
-    private User collector;
+    private User user;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -38,6 +38,15 @@ public class PropertyOwner {
 
 
     public PropertyOwner() {
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
@@ -72,14 +81,6 @@ public class PropertyOwner {
         this.properties = properties;
     }
 
-
-    public User getCollector() {
-        return collector;
-    }
-
-    public void setCollector(User collector) {
-        this.collector = collector;
-    }
 
     public Date getCreatedAt() {
         return createdAt;

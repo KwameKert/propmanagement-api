@@ -29,7 +29,7 @@ public class Property {
     private int value;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="property_owner_id", nullable= false)
+    @JoinColumn(name="propertyOwner_id", nullable= false)
     @JsonIgnore
     private PropertyOwner propertyOwner;
 

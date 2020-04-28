@@ -2,6 +2,7 @@ package com.codeinsyt.tigerseal.services.impl;
 
 import com.codeinsyt.tigerseal.models.User;
 import com.codeinsyt.tigerseal.repositories.UserRepository;
+import com.codeinsyt.tigerseal.services.interfaces.AuthService;
 import com.codeinsyt.tigerseal.services.interfaces.UserService;
 import com.codeinsyt.tigerseal.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 
 @Service
-public class AuthServiceImpl implements UserService, UserDetailsService {
+public class AuthServiceImpl implements AuthService, UserDetailsService {
 
     private UserRepository userRepository;
     private JwtUtil jwtTokenUtil;

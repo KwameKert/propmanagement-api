@@ -45,9 +45,6 @@ public class User {
 
     private String stat;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PropertyOwner> property_owners;
-
 
 
     @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -56,6 +53,8 @@ public class User {
             joinColumns = {@JoinColumn(name="user_id")},
             inverseJoinColumns = {@JoinColumn(name="role_id")}
     )
+
+
     private Set<Role>  roles  = new HashSet<Role>();
 
     public User() {
@@ -143,13 +142,7 @@ public class User {
     }
 
 
-    public List<PropertyOwner> getProperty_owners() {
-        return property_owners;
-    }
 
-    public void setProperty_owners(List<PropertyOwner> property_owners) {
-        this.property_owners = property_owners;
-    }
 
 
     @Override
@@ -163,7 +156,6 @@ public class User {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", stat='" + stat + '\'' +
-                ", property_owners=" + property_owners +
                 ", roles=" + roles +
                 '}';
     }

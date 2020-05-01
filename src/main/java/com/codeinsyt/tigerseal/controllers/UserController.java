@@ -6,10 +6,7 @@ import com.codeinsyt.tigerseal.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,8 +24,16 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<?> addUser(@Valid @RequestBody User user){
-        System.out.println(user);
-        return new ResponseEntity<>(this.userService.createUser(user), HttpStatus.OK);
+    public ResponseEntity<?> addUser(@RequestBody User user){
+        System.out.println("Im here");
+               return new ResponseEntity<>(this.userService.createUser(user), HttpStatus.OK);
     }
+
+
+    @GetMapping
+    public ResponseEntity<?> listAllUsers(){
+       return new ResponseEntity<>(this.userService.listUsers(), HttpStatus.OK);
+    }
+
+
 }

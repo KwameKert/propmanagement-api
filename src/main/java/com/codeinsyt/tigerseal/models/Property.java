@@ -31,9 +31,9 @@ public class Property {
     private int value;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="propertyOwner_id", nullable= false)
+    @JoinColumn(name="user_id", nullable= false)
     @JsonIgnore
-    private PropertyOwner propertyOwner;
+    private User propertyOwner;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -145,11 +145,11 @@ public class Property {
     }
 
 
-    public PropertyOwner getPropertyOwner() {
+    public User getPropertyOwner() {
         return propertyOwner;
     }
 
-    public void setPropertyOwner(PropertyOwner propertyOwner) {
+    public void setPropertyOwner(User propertyOwner) {
         this.propertyOwner = propertyOwner;
     }
 

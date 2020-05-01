@@ -2,6 +2,7 @@ package com.codeinsyt.tigerseal.repositories;
 
 
 import com.codeinsyt.tigerseal.models.PropertyOwner;
+import com.codeinsyt.tigerseal.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,10 @@ public interface PropertyOwnerRepository extends JpaRepository<PropertyOwner, Lo
     @Query("UPDATE PropertyOwner e SET e.stat = ?2 WHERE e.id = ?1")
     @Transactional
     int softDelete(Long id, String status);
+
+
+    PropertyOwner findByUsernameAndPassword(String user, String password);
+
 
     List<PropertyOwner> findAllByStatOrderByIdAsc(String status);
 }

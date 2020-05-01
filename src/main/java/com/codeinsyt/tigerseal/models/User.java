@@ -30,6 +30,11 @@ public class User {
 
     private String fullName;
 
+
+    @OneToMany(mappedBy = "propertyOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Property> properties;
+
+
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -54,6 +59,15 @@ public class User {
     private Set<Role>  roles  = new HashSet<Role>();
 
     public User() {
+    }
+
+
+    public List<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<Property> properties) {
+        this.properties = properties;
     }
 
     public String getStat() {

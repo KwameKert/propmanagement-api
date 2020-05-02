@@ -34,6 +34,11 @@ public class PropertyController {
     }
 
 
+    @GetMapping
+    public ResponseEntity<?> listProperty(){
+        return new ResponseEntity<>(this.propertyService.listProperties(), HttpStatus.OK);
+    }
+
 
 
 }

@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
                 return responseAPI(null,"No collectors found",HttpStatus.NO_CONTENT);
             }
 
-            return responseAPI(users, "Collectors found", HttpStatus.OK);
+            return responseAPI(users, "Owners found", HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);

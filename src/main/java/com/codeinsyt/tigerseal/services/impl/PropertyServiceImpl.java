@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
@@ -106,7 +107,18 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public HashMap<String, Object> listProperties() {
-        return null;
+        try{
+            List<Property> properties = this.propertyRepository.findAllByStatNotOrderByIdAsc("deleted");
+            if(properties.isEmpty()){
+                return responseAPI(null, "No Property found", HttpStatus.NO_CONTENT);
+            }else{
+                return responseAPI(properties,"Listing Properties ", HttpStatus.FOUND);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override

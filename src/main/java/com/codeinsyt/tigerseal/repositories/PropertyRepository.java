@@ -18,5 +18,6 @@ public interface PropertyRepository  extends JpaRepository<Property, Long> {
     @Transactional
     int softDelete(Long id, String status);
 
-    List<Property> findAllByStatOrderByIdAsc(String status);
+    List<Property> findAllByStatNotOrderByIdAsc(String status);
+
 }

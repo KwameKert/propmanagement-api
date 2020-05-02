@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 @Table(name="app_properties")
@@ -24,9 +25,9 @@ public class Property {
 
     private String stat;
 
-    private Long latitude;
+    private Double latitude;
 
-    private Long longitude;
+    private Double longitude;
 
     private int value;
 
@@ -88,19 +89,19 @@ public class Property {
         this.rate = rate;
     }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -152,7 +153,6 @@ public class Property {
     public void setPropertyOwner(User propertyOwner) {
         this.propertyOwner = propertyOwner;
     }
-
 
     public int getValue() {
         return value;

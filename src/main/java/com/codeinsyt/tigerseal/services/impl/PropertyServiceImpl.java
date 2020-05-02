@@ -60,9 +60,48 @@ public class PropertyServiceImpl implements PropertyService {
         }
     }
 
+    public Property isProperty(Long id){
+        try{
+            Property property =  this.propertyRepository.findById(id).get();
+
+            return property;
+        }catch(Exception e){
+            return null;
+        }
+    }
+
+
+
     @Override
     public HashMap<String, Object> updateProperty(PropertyDTO propertyDTO) {
-        return null;
+
+        try{
+
+            if(isProperty(propertyDTO.getId()) != null){
+
+                Property property = new Property();
+                property.setId(propertyDTO.getId());
+                property.setPropCat(propertyDTO.getPropCat());
+                property.setElectoralArea(propertyDTO.getElectoralArea());
+                property.setPropNo(propertyDTO.getPropNo());
+                property.setLatitude(propertyDTO.getLatitude());
+                property.setLongitude(propertyDTO.getLongitude());
+                property.setRate(propertyDTO.getRate());
+                property.setUser(this.userRepository.findById(propertyDTO.getUserId()).get());
+                property.setStat(propertyDTO.getStat());
+                property.setValue(propertyDTO.getValue());
+
+                Property updatedProperty = propertyRepository.save(property);
+                return responseAPI(updatedProperty, "New Property updated", HttpStatus.OK);
+            }else{
+                return responseAPI(null, "No Property found", HttpStatus.NOT_FOUND);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override

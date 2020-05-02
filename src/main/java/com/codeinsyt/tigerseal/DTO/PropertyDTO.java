@@ -2,6 +2,9 @@ package com.codeinsyt.tigerseal.DTO;
 
 public class PropertyDTO {
 
+    private Long id;
+
+
     private String propNo;
 
     private String propCat;
@@ -90,5 +93,14 @@ public class PropertyDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

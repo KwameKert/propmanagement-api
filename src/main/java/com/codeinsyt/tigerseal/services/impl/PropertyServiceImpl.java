@@ -2,7 +2,6 @@ package com.codeinsyt.tigerseal.services.impl;
 
 import com.codeinsyt.tigerseal.DTO.PropertyDTO;
 import com.codeinsyt.tigerseal.models.Property;
-import com.codeinsyt.tigerseal.models.User;
 import com.codeinsyt.tigerseal.repositories.PropertyRepository;
 import com.codeinsyt.tigerseal.repositories.UserRepository;
 import com.codeinsyt.tigerseal.services.interfaces.PropertyService;
@@ -123,6 +122,23 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public HashMap<String, Object> softDelete(Long id) {
-        return null;
+       try{
+
+           if(isProperty(id) != null){
+
+               this.propertyRepository.softDelete(id,"deleted");
+               return this.listProperties();
+
+           }else{
+               return responseAPI(null, "No Property found", HttpStatus.NOT_FOUND);
+           }
+
+       }catch(Exception e){
+           e.printStackTrace();
+           return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+       }
     }
+
+
+
 }

@@ -33,4 +33,14 @@ public class UserController {
     public ResponseEntity<?> listAllUsers(){
         return new ResponseEntity<>(this.userService.listUsers(), HttpStatus.OK);
     }
+
+    @GetMapping("owners")
+    public ResponseEntity<?> listAllOwners(){
+        return new ResponseEntity<>(this.userService.listOwners(), HttpStatus.OK);
+    }
+
+    @GetMapping("collectors")
+    public ResponseEntity<?> listAllCollector(){
+        return new ResponseEntity<>(this.userService.listCollectors(), HttpStatus.OK);
+    }
 }

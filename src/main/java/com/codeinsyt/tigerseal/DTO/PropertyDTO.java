@@ -18,7 +18,7 @@ public class PropertyDTO {
 
     private int value;
 
-    private Long owner_id;
+    private Long userId;
 
     public String getPropNo() {
         return propNo;
@@ -84,11 +84,11 @@ public class PropertyDTO {
         this.value = value;
     }
 
-    public Long getOwner_id() {
-        return owner_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setOwner_id(Long owner_id) {
-        this.owner_id = owner_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

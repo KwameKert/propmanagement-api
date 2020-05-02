@@ -32,9 +32,9 @@ public class Property {
     private int value;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="user_id", nullable= false)
+    @JoinColumn(name="user_id", nullable= true)
     @JsonIgnore
-    private User propertyOwner;
+    private User user;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -138,20 +138,22 @@ public class Property {
                 ", propCat='" + propCat + '\'' +
                 ", electoralArea='" + electoralArea + '\'' +
                 ", rate=" + rate +
+                ", stat='" + stat + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+                ", value=" + value +
+                ", user=" + user +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }
 
-
-    public User getPropertyOwner() {
-        return propertyOwner;
+    public User getUser() {
+        return user;
     }
 
-    public void setPropertyOwner(User propertyOwner) {
-        this.propertyOwner = propertyOwner;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getValue() {

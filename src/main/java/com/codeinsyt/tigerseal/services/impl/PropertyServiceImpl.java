@@ -2,6 +2,7 @@ package com.codeinsyt.tigerseal.services.impl;
 
 import com.codeinsyt.tigerseal.DTO.PropertyDTO;
 import com.codeinsyt.tigerseal.models.Property;
+import com.codeinsyt.tigerseal.models.User;
 import com.codeinsyt.tigerseal.repositories.PropertyRepository;
 import com.codeinsyt.tigerseal.repositories.UserRepository;
 import com.codeinsyt.tigerseal.services.interfaces.PropertyService;
@@ -39,7 +40,6 @@ public class PropertyServiceImpl implements PropertyService {
     public HashMap<String, Object> createProperty(PropertyDTO propertyDTO) {
 
         try{
-
             Property property = new Property();
             property.setPropCat(propertyDTO.getPropCat());
             property.setElectoralArea(propertyDTO.getElectoralArea());
@@ -47,11 +47,11 @@ public class PropertyServiceImpl implements PropertyService {
             property.setLatitude(propertyDTO.getLatitude());
             property.setLongitude(propertyDTO.getLongitude());
             property.setRate(propertyDTO.getRate());
-            property.setPropertyOwner(this.userRepository.findById(propertyDTO.getOwner_id()).get());
+            property.setUser(this.userRepository.findById(propertyDTO.getUserId()).get());
             property.setStat(propertyDTO.getStat());
             property.setValue(propertyDTO.getValue());
 
-            Property newProperty = this.propertyRepository.save(property);
+           Property newProperty = propertyRepository.save(property);
             return responseAPI(newProperty, "New Property added", HttpStatus.OK);
 
         }catch(Exception e){

@@ -28,8 +28,9 @@ public class User {
     private String fullName;
 
 
-    @OneToMany(mappedBy = "propertyOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Property> properties;
+
 
 
     @CreationTimestamp
@@ -116,11 +117,6 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
-    }
-
-    public List<Role> listRoles() {
-        List<Role> role_list = new ArrayList<>(roles);
-        return role_list;
     }
 
     public void setRoles(Set<Role> roles) {

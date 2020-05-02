@@ -49,6 +49,7 @@ public class PropertyServiceImpl implements PropertyService {
             property.setRate(propertyDTO.getRate());
             property.setPropertyOwner(this.userRepository.findById(propertyDTO.getOwner_id()).get());
             property.setStat(propertyDTO.getStat());
+            property.setValue(propertyDTO.getValue());
 
             Property newProperty = this.propertyRepository.save(property);
             return responseAPI(newProperty, "New Property added", HttpStatus.OK);

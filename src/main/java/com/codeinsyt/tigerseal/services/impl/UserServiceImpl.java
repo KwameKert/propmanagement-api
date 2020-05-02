@@ -81,16 +81,21 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    List<User> findByRole( String role) {
+        try {
+           List<User>  users = this.userRepository.findAllByRole(role);
+           return users;
+        }catch(Exception e){
+
+            return null;
+        }
+
+    }
+
     @Override
     public HashMap<String, Object> listUsers() {
-
        try{
-           List<User>  users = this.userRepository.findAllByStatOrderByIdAsc("active");
-//           ArrayList<User> owner = new ArrayList<>() ;
-//           for( User user: users){
-//               owner.add((User) user.listRoles().stream().filter(r -> r.getRole() == "OWNER"));
-//           }
-
+          List<User>  users = this.userRepository.findAllByStatOrderByIdAsc("active");
            if(!users.isEmpty())
                return responseAPI(users,"Users found",HttpStatus.FOUND);
            else
@@ -100,6 +105,40 @@ public class UserServiceImpl implements UserService {
            e.printStackTrace();
            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
        }
+    }
+
+    @Override
+    public HashMap<String, Object> listOwners() {
+        try{
+
+            List<User> users = this.findByRole("OWNER");
+            if(users.isEmpty()){
+
+                return responseAPI(null,"No collectors found",HttpStatus.NO_CONTENT);
+            }
+
+            return responseAPI(users, "Collectors found", HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @Override
+    public HashMap<String, Object> listCollectors() {
+        try{
+            List<User> users = this.findByRole("COLLECTOR");
+            if(users.isEmpty()){
+
+                return responseAPI(null,"No collectors found",HttpStatus.NO_CONTENT);
+            }
+
+            return responseAPI(users, "Collectors found", HttpStatus.OK);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override

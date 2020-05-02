@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/property")
+@RequestMapping("api/v1/property/")
 public class PropertyController {
 
     private PropertyService propertyService;
@@ -39,6 +39,11 @@ public class PropertyController {
         return new ResponseEntity<>(this.propertyService.listProperties(), HttpStatus.OK);
     }
 
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteProperty(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.propertyService.softDelete(id), HttpStatus.OK);
+    }
 
 
 }

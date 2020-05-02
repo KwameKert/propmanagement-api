@@ -6,10 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="app_users")
@@ -119,6 +116,11 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public List<Role> listRoles() {
+        List<Role> role_list = new ArrayList<>(roles);
+        return role_list;
     }
 
     public void setRoles(Set<Role> roles) {

@@ -24,16 +24,13 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody User user){
-        System.out.println("Im here");
-               return new ResponseEntity<>(this.userService.createUser(user), HttpStatus.OK);
+    public ResponseEntity<?> addUser(@Valid @RequestBody User user){
+        System.out.println(user);
+        return new ResponseEntity<>(this.userService.createUser(user), HttpStatus.OK);
     }
-
 
     @GetMapping
     public ResponseEntity<?> listAllUsers(){
-       return new ResponseEntity<>(this.userService.listUsers(), HttpStatus.OK);
+        return new ResponseEntity<>(this.userService.listUsers(), HttpStatus.OK);
     }
-
-
 }

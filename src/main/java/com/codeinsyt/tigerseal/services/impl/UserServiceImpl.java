@@ -1,5 +1,6 @@
 package com.codeinsyt.tigerseal.services.impl;
 
+import com.codeinsyt.tigerseal.DTO.UserDTO;
 import com.codeinsyt.tigerseal.models.Role;
 import com.codeinsyt.tigerseal.models.User;
 import com.codeinsyt.tigerseal.repositories.UserRepository;
@@ -32,14 +33,24 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public HashMap<String, Object> createUser(User user) {
+    public HashMap<String, Object> createUser(UserDTO userDTO) {
 
         try{
-            Role role = new Role();
-            role.setRole("ADMIN");
 
-            Set<Role> s = new HashSet<>();
-            s.add(role);
+            Role role = new Role();
+            role.setRole(userDTO.getRole());
+            Set<Role> setRole = new HashSet<>();
+            setRole.add(role);
+
+            User user = new User();
+            user.setRoles(setRole);
+            user.setPassword(userDTO.getPassword());
+            user.setUsername(userDTO.getUsername());
+            user.setFullName(userDTO.getFullName());
+            user.setStat(userDTO.getStat());
+            user.setEmail(userDTO.getEmail());
+
+
             User newUser = this.userRepository.save(user);
             return responseAPI(newUser,"User created successfully", HttpStatus.OK);
 
@@ -67,10 +78,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public HashMap<String, Object> updateUser(User user) {
+    public HashMap<String, Object> updateUser(UserDTO userDTO) {
         try{
 
-            if(userExists(user.getId())){
+            if(userExists(userDTO.getId())){
+
+                User user = new User();
 
                 User updatedUser = this.userRepository.save(user);
                 return responseAPI(user,"User updated successfully", HttpStatus.OK);

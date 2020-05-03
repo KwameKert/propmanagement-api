@@ -1,6 +1,7 @@
 package com.codeinsyt.tigerseal.controllers;
 
 
+import com.codeinsyt.tigerseal.DTO.UserDTO;
 import com.codeinsyt.tigerseal.models.User;
 import com.codeinsyt.tigerseal.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,8 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<?> addUser(@Valid @RequestBody User user){
-        System.out.println(user);
-        return new ResponseEntity<>(this.userService.createUser(user), HttpStatus.OK);
+    public ResponseEntity<?> addUser(@Valid @RequestBody UserDTO userDTO){
+        return new ResponseEntity<>(this.userService.createUser(userDTO), HttpStatus.OK);
     }
 
     @GetMapping

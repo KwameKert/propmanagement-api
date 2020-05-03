@@ -22,6 +22,7 @@ public class User {
     private String email;
 
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
@@ -51,8 +52,6 @@ public class User {
             joinColumns = {@JoinColumn(name="user_id")},
             inverseJoinColumns = {@JoinColumn(name="role_id")}
     )
-
-
     private Set<Role>  roles  = new HashSet<Role>();
 
     public User() {

@@ -29,4 +29,12 @@ public interface UserRepository extends JpaRepository<User,Long> {
                     "INNER JOIN roles ON roles.id = users_roles.role_id WHERE roles.role = ?1 AND app_users.stat !='deleted'",
             nativeQuery = true)
     List<User> findAllByRole(String role);
+
+    @Query(
+            value = "SELECT * FROM users_roles INNER JOIN app_users ON app_users.id = users_roles.user_id \n" +
+                    "INNER JOIN roles ON roles.id = users_roles.role_id WHERE roles.role != 'OWNER' AND app_users.stat !='deleted'",
+            nativeQuery = true)
+    List<User> findAllUsers();
+
+
 }

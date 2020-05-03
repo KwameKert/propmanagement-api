@@ -1,5 +1,6 @@
 package com.codeinsyt.tigerseal.services.impl;
 
+import com.codeinsyt.tigerseal.models.Role;
 import com.codeinsyt.tigerseal.models.User;
 import com.codeinsyt.tigerseal.repositories.UserRepository;
 import com.codeinsyt.tigerseal.services.interfaces.UserService;
@@ -7,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,6 +35,11 @@ public class UserServiceImpl implements UserService {
     public HashMap<String, Object> createUser(User user) {
 
         try{
+            Role role = new Role();
+            role.setRole("ADMIN");
+
+            Set<Role> s = new HashSet<>();
+            s.add(role);
             User newUser = this.userRepository.save(user);
             return responseAPI(newUser,"User created successfully", HttpStatus.OK);
 
@@ -95,7 +98,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public HashMap<String, Object> listUsers() {
        try{
-          List<User>  users = this.userRepository.findAllByStatOrderByIdAsc("active");
+
+          List<User>  users = this.userRepository.findAllUsers();
            if(!users.isEmpty())
                return responseAPI(users,"Users found",HttpStatus.FOUND);
            else

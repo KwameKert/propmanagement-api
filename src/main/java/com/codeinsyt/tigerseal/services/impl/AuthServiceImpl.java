@@ -72,6 +72,7 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
 
         if(userDetails.getUsername() != null){
             String jwt = getJwt(userDetails);
+            result.put("user",userRepository.findByUsernameAndPassword(username, password));
             result.put("token", jwt);
             result.put("message","User authenticated");
             result.put("status", HttpStatus.OK);

@@ -21,6 +21,8 @@ public interface UserService {
 
     public HashMap<String, Object> listCollectors();
 
+    public HashMap<String, Object> getUser(Long id);
+
 
 
     public HashMap<String, Object> softDelete(Long id);

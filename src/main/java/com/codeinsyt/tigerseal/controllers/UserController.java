@@ -43,4 +43,16 @@ public class UserController {
     public ResponseEntity<?> listAllCollector(){
         return new ResponseEntity<>(this.userService.listCollectors(), HttpStatus.OK);
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> viewUser(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.userService.getUser(id), HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.userService.softDelete(id), HttpStatus.OK);
+    }
+
 }

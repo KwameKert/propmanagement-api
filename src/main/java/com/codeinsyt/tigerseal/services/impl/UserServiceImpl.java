@@ -32,27 +32,34 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
     @Override
     public HashMap<String, Object> createUser(UserDTO userDTO) {
 
         try{
 
-            Role role = new Role();
-            role.setRole(userDTO.getRole());
-            Set<Role> setRole = new HashSet<>();
-            setRole.add(role);
+            if(!userExists(userDTO.getId())){
 
-            User user = new User();
-            user.setRoles(setRole);
-            user.setPassword(userDTO.getPassword());
-            user.setUsername(userDTO.getUsername());
-            user.setFullName(userDTO.getFullName());
-            user.setStat(userDTO.getStat());
-            user.setEmail(userDTO.getEmail());
+                Role role = new Role();
+                role.setRole(userDTO.getRole());
+                Set<Role> setRole = new HashSet<>();
+                setRole.add(role);
+
+                User user = new User();
+                user.setRoles(setRole);
+                user.setPassword(userDTO.getPassword());
+                user.setUsername(userDTO.getUsername());
+                user.setFullName(userDTO.getFullName());
+                user.setStat(userDTO.getStat());
+                user.setEmail(userDTO.getEmail());
 
 
-            User newUser = this.userRepository.save(user);
-            return responseAPI(newUser,"User created successfully", HttpStatus.OK);
+                User newUser = this.userRepository.save(user);
+                return responseAPI(newUser,"User created successfully", HttpStatus.OK);
+            }else{
+                return responseAPI(null,"Email exits successfully", HttpStatus.BAD_REQUEST);
+            }
+
 
         }catch(Exception e){
             e.printStackTrace();
@@ -83,9 +90,19 @@ public class UserServiceImpl implements UserService {
 
             if(userExists(userDTO.getId())){
 
-                User user = new User();
+                Role role = new Role();
+                role.setRole(userDTO.getRole());
+                Set<Role> setRole = new HashSet<>();
+                setRole.add(role);
 
-                User updatedUser = this.userRepository.save(user);
+                User user = new User();
+                user.setRoles(setRole);
+                user.setPassword(userDTO.getPassword());
+                user.setUsername(userDTO.getUsername());
+                user.setFullName(userDTO.getFullName());
+                user.setStat(userDTO.getStat());
+                user.setEmail(userDTO.getEmail());
+
                 return responseAPI(user,"User updated successfully", HttpStatus.OK);
             }
 
@@ -141,6 +158,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
+
+
     @Override
     public HashMap<String, Object> listCollectors() {
         try{
@@ -156,6 +176,26 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
+    }
+
+    @Override
+    public HashMap<String, Object> getUser(Long id) {
+       try{
+
+           if(userExists(id)){
+
+               Optional<User> userFound = this.userRepository.findById(id);
+               return responseAPI(userFound.get(), "User found", HttpStatus.OK);
+
+           }
+
+
+           return responseAPI(null,"No user found", HttpStatus.NOT_FOUND);
+
+       }catch(Exception e){
+           e.printStackTrace();
+           return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+       }
     }
 
     @Override

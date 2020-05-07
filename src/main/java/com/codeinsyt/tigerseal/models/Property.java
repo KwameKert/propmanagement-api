@@ -15,6 +15,8 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String owner;
+
     private String propNo;
 
     private String propCat;
@@ -48,6 +50,10 @@ public class Property {
     public Property() {
     }
 
+
+    public String getOwner() {
+        return this.user.getUsername();
+    }
 
     public Long getId() {
         return id;

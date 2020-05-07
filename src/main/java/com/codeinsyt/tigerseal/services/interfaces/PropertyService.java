@@ -17,4 +17,6 @@ public interface PropertyService {
     public HashMap<String, Object> listProperties();
 
     public HashMap<String, Object> softDelete(Long id);
+
+    public HashMap<String, Object> getProperty(Long id);
 }

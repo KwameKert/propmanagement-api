@@ -139,6 +139,19 @@ public class PropertyServiceImpl implements PropertyService {
        }
     }
 
+    @Override
+    public HashMap<String, Object> getProperty(Long id) {
+        try{
+            Property propertyFound = this.isProperty(id);
+            if(propertyFound != null){
+                return responseAPI(propertyFound,"Property found", HttpStatus.OK);
+            }
+            return responseAPI(null, "No Property found", HttpStatus.NOT_FOUND);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
 
 
 }

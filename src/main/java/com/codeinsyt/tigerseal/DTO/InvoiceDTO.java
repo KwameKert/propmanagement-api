@@ -12,9 +12,13 @@ import java.util.Date;
 public class InvoiceDTO {
 
 
-    private Long invoiceId;
+
+    private Long id;
+
+    private String invoiceId;
 
     private Long propertyId;
+
 
     private double amount;
 
@@ -26,6 +30,14 @@ public class InvoiceDTO {
 
     @Lob
     private String notes;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNotes() {
         return notes;
@@ -39,17 +51,18 @@ public class InvoiceDTO {
         return propertyId;
     }
 
-    public Long getInvoiceId() {
+    public String getInvoiceId() {
         return invoiceId;
     }
 
-    public void setInvoiceId(Long invoiceId) {
+    public void setInvoiceId(String invoiceId) {
         this.invoiceId = invoiceId;
     }
 
     public void setPropertyId(Long propertyId) {
         this.propertyId = propertyId;
     }
+
 
     public double getAmount() {
         return amount;
@@ -81,5 +94,19 @@ public class InvoiceDTO {
 
     public void setBillDate(Date billDate) {
         this.billDate = billDate;
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceDTO{" +
+                "id=" + id +
+                ", invoiceId='" + invoiceId + '\'' +
+                ", propertyId=" + propertyId +
+                ", amount=" + amount +
+                ", stat='" + stat + '\'' +
+                ", dateDue=" + dateDue +
+                ", billDate=" + billDate +
+                ", notes='" + notes + '\'' +
+                '}';
     }
 }

@@ -19,6 +19,8 @@ public class Invoice {
     @JsonIgnore
     private Property property;
 
+    private String invoiceId;
+
     private double amount;
 
     private String stat;
@@ -26,6 +28,8 @@ public class Invoice {
     private Date dateDue;
 
     private Date billDate;
+
+    private String propertyNo;
 
     @Lob
     private String notes;
@@ -41,6 +45,17 @@ public class Invoice {
     public Invoice() {
     }
 
+    public String getPropertyNo() {
+        return property.getPropNo();
+    }
+
+    public String getInvoiceId() {
+        return invoiceId;
+    }
+
+    public void setInvoiceId(String invoiceId) {
+        this.invoiceId = invoiceId;
+    }
 
     public Long getId() {
         return id;
@@ -119,7 +134,11 @@ public class Invoice {
         return "Invoice{" +
                 "id=" + id +
                 ", property=" + property +
+                ", invoiceId='" + invoiceId + '\'' +
                 ", amount=" + amount +
+                ", stat='" + stat + '\'' +
+                ", dateDue=" + dateDue +
+                ", billDate=" + billDate +
                 ", notes='" + notes + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

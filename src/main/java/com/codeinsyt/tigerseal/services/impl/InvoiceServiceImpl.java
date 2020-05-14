@@ -41,11 +41,15 @@ public class InvoiceServiceImpl implements InvoiceService {
         try{
 
             Invoice invoice = new Invoice();
+            invoice.setId(invoiceDTO.getId());
+            invoice.setInvoiceId(invoiceDTO.getInvoiceId());
             invoice.setNotes(invoiceDTO.getNotes());
             invoice.setAmount(invoiceDTO.getAmount());
+            invoice.setNotes(invoiceDTO.getNotes());
+            invoice.setBillDate(invoiceDTO.getBillDate());
+            invoice.setDateDue(invoiceDTO.getBillDate());
             invoice.setProperty(this.propertyRepository.findById(invoiceDTO.getPropertyId()).get());
             invoice.setStat(invoiceDTO.getStat());
-
             Invoice newInvoice = this.invoiceRepository.save(invoice);
 
             return responseAPI(newInvoice, "Invoice generated ", HttpStatus.OK);
@@ -74,18 +78,22 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         try{
 
-            if(isInvoice(invoiceDTO.getInvoiceId()) != null){
+            if(isInvoice(invoiceDTO.getId()) != null){
 
                 Invoice invoice = new Invoice();
-                invoice.setId(invoiceDTO.getInvoiceId());
+                invoice.setId(invoiceDTO.getId());
+                invoice.setInvoiceId(invoiceDTO.getInvoiceId());
                 invoice.setNotes(invoiceDTO.getNotes());
                 invoice.setAmount(invoiceDTO.getAmount());
+                invoice.setNotes(invoiceDTO.getNotes());
+                invoice.setBillDate(invoiceDTO.getBillDate());
+                invoice.setDateDue(invoiceDTO.getBillDate());
                 invoice.setProperty(this.propertyRepository.findById(invoiceDTO.getPropertyId()).get());
                 invoice.setStat(invoiceDTO.getStat());
 
                 Invoice newInvoice = this.invoiceRepository.save(invoice);
 
-                return responseAPI(newInvoice, "Invoice genereated ", HttpStatus.OK);
+                return responseAPI(newInvoice, "Invoice generated ", HttpStatus.OK);
             }else{
                 return responseAPI(null, "No Invoice found", HttpStatus.NOT_FOUND);
             }

@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -33,10 +34,15 @@ public class Property {
 
     private int value;
 
+    private Long ownerId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="user_id", nullable= true)
     @JsonIgnore
     private User user;
+
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Property> invoices;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -50,6 +56,9 @@ public class Property {
     public Property() {
     }
 
+    public Long getOwnerId() {
+        return user.getId();
+    }
 
     public String getOwner() {
         return this.user.getUsername();
@@ -134,6 +143,14 @@ public class Property {
 
     public void setStat(String stat) {
         this.stat = stat;
+    }
+
+    public List<Property> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Property> invoices) {
+        this.invoices = invoices;
     }
 
     @Override

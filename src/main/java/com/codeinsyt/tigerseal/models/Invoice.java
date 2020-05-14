@@ -1,5 +1,6 @@
 package com.codeinsyt.tigerseal.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Invoice {
 
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JoinColumn(name="property_id", nullable = false)
+    @JsonIgnore
     private Property property;
 
     private int price;

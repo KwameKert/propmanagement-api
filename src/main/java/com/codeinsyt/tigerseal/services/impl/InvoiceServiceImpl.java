@@ -112,9 +112,40 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
     }
 
+    public Property isProperty(Long id){
+        try{
+            Property property =  this.propertyRepository.findById(id).get();
+
+            return property;
+        }catch(Exception e){
+            return null;
+        }
+    }
+
     @Override
     public HashMap<String, Object> getPropertyInvoices(Long id) {
-        return null;
+
+        try{
+            if( this.isProperty(id) != null){
+                Optional<Property> properties = this.propertyRepository.findById(id);
+                List<Invoice> propertyInvoice = properties.get().getInvoices();
+
+                if(!propertyInvoice.isEmpty()){
+                    return responseAPI(propertyInvoice, "Property Invoices found", HttpStatus.OK);
+                }else{
+                    return responseAPI(null, "No Invoice found", HttpStatus.NOT_FOUND);
+                }
+
+            }else{
+                return responseAPI(null, "No Property found", HttpStatus.NOT_FOUND);
+            }
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override

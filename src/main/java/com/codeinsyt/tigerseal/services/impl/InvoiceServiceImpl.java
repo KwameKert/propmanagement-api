@@ -113,6 +113,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public HashMap<String, Object> getPropertyInvoices(Long id) {
+        return null;
+    }
+
+    @Override
     public HashMap<String, Object> getInvoice(Long id) {
         try{
 

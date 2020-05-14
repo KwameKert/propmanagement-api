@@ -13,7 +13,10 @@ public interface InvoiceService {
 
     public HashMap<String, Object> updateInvoice(InvoiceDTO invoiceDTO);
 
+
     public HashMap<String, Object> listInvoices();
+
+    public HashMap<String, Object> getInvoice(Long id);
 
     public HashMap<String, Object> softDelete(Long id);
 }

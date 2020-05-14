@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -47,7 +48,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             Invoice newInvoice = this.invoiceRepository.save(invoice);
 
-            return responseAPI(newInvoice, "Invoice genereated ", HttpStatus.OK);
+            return responseAPI(newInvoice, "Invoice generated ", HttpStatus.OK);
 
 
         }catch(Exception e){
@@ -103,6 +104,23 @@ public class InvoiceServiceImpl implements InvoiceService {
                 return responseAPI(null, "No Invoice found", HttpStatus.NO_CONTENT);
             }else{
                 return responseAPI(invoices,"Listing Properties ", HttpStatus.FOUND);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @Override
+    public HashMap<String, Object> getInvoice(Long id) {
+        try{
+
+            if(isInvoice(id) != null ){
+                Optional<Invoice> invoiceFound = this.invoiceRepository.findById(id);
+                return responseAPI(invoiceFound, "Invoice Found ", HttpStatus.OK);
+            }else{
+                return responseAPI(null, "Invoice not found", HttpStatus.NO_CONTENT);
             }
 
         }catch(Exception e){

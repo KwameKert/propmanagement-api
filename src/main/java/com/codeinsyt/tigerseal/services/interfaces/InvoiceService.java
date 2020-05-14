@@ -1,5 +1,6 @@
 package com.codeinsyt.tigerseal.services.interfaces;
 
+import com.codeinsyt.tigerseal.DTO.InvoiceDTO;
 import com.codeinsyt.tigerseal.models.Invoice;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +9,9 @@ import java.util.HashMap;
 public interface InvoiceService {
 
 
-    public HashMap<String, Object> createInvoice(Invoice invoice );
+    public HashMap<String, Object> createInvoice(InvoiceDTO invoiceDTO );
 
-    public HashMap<String, Object> updateInvoice(Invoice invoice);
+    public HashMap<String, Object> updateInvoice(InvoiceDTO invoiceDTO);
 
     public HashMap<String, Object> listInvoices();
 

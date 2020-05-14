@@ -40,7 +40,7 @@ public class InvoiceController  {
 
     @GetMapping("{id}")
     public ResponseEntity<?> getInvoice(@PathVariable("id") Long id){
-        return new ResponseEntity<>(this.invoiceService.(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.invoiceService.getInvoice(id), HttpStatus.OK);
     }
 
 

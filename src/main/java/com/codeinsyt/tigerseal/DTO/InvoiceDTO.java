@@ -17,7 +17,7 @@ public class InvoiceDTO {
 
     private int price;
 
-    private String stat;
+    private String stat = "Unpaid";
 
 
     @Lob

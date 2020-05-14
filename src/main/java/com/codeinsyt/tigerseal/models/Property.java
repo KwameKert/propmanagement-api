@@ -42,7 +42,7 @@ public class Property {
     private User user;
 
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Property> invoices;
+    private List<Invoice> invoices;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -145,11 +145,11 @@ public class Property {
         this.stat = stat;
     }
 
-    public List<Property> getInvoices() {
+    public List<Invoice> getInvoices() {
         return invoices;
     }
 
-    public void setInvoices(List<Property> invoices) {
+    public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
     }
 

@@ -28,7 +28,6 @@ public class Transaction {
     private Date createdAt;
 
     @CreationTimestamp
-    @Column(updatable = false)
     private Date updatedAt;
 
 

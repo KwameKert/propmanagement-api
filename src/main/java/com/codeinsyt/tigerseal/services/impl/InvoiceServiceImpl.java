@@ -1,14 +1,29 @@
 package com.codeinsyt.tigerseal.services.impl;
 
+import com.codeinsyt.tigerseal.DTO.InvoiceDTO;
 import com.codeinsyt.tigerseal.models.Invoice;
+import com.codeinsyt.tigerseal.models.Property;
+import com.codeinsyt.tigerseal.repositories.InvoiceRepository;
+import com.codeinsyt.tigerseal.repositories.PropertyRepository;
 import com.codeinsyt.tigerseal.services.interfaces.InvoiceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
+
+    private InvoiceRepository invoiceRepository;
+    private PropertyRepository propertyRepository;
+
+    @Autowired
+    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, PropertyRepository propertyRepository) {
+        this.invoiceRepository = invoiceRepository;
+        this.propertyRepository = propertyRepository;
+    }
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
         HashMap<String, Object> responseData = new HashMap<>();
@@ -20,22 +35,98 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public HashMap<String, Object> createInvoice(Invoice invoice) {
-        return null;
+    public HashMap<String, Object> createInvoice(InvoiceDTO invoiceDTO) {
+
+        try{
+
+            Invoice invoice = new Invoice();
+            invoice.setNotes(invoiceDTO.getNotes());
+            invoice.setPrice(invoiceDTO.getPrice());
+            invoice.setProperty(this.propertyRepository.findById(invoiceDTO.getPropertyId()).get());
+            invoice.setStat(invoiceDTO.getStat());
+
+            Invoice newInvoice = this.invoiceRepository.save(invoice);
+
+            return responseAPI(newInvoice, "Invoice genereated ", HttpStatus.OK);
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
+
+    public Invoice isInvoice(Long id){
+        try{
+            Invoice invoice =  this.invoiceRepository.findById(id).get();
+
+            return invoice;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Override
-    public HashMap<String, Object> updateInvoice(Invoice invoice) {
-        return null;
+    public HashMap<String, Object> updateInvoice(InvoiceDTO invoiceDTO) {
+
+        try{
+
+            if(isInvoice(invoiceDTO.getInvoiceId()) != null){
+
+                Invoice invoice = new Invoice();
+                invoice.setId(invoiceDTO.getInvoiceId());
+                invoice.setNotes(invoiceDTO.getNotes());
+                invoice.setPrice(invoiceDTO.getPrice());
+                invoice.setProperty(this.propertyRepository.findById(invoiceDTO.getPropertyId()).get());
+                invoice.setStat(invoiceDTO.getStat());
+
+                Invoice newInvoice = this.invoiceRepository.save(invoice);
+
+                return responseAPI(newInvoice, "Invoice genereated ", HttpStatus.OK);
+            }else{
+                return responseAPI(null, "No Invoice found", HttpStatus.NOT_FOUND);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> listInvoices() {
-        return null;
+        try{
+            List<Invoice> invoices = this.invoiceRepository.findAllByStatNotOrderByIdAsc("deleted");
+            if(invoices.isEmpty()){
+                return responseAPI(null, "No Invoice found", HttpStatus.NO_CONTENT);
+            }else{
+                return responseAPI(invoices,"Listing Properties ", HttpStatus.FOUND);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> softDelete(Long id) {
-        return null;
+        try{
+
+            if(isInvoice(id) != null){
+
+                this.invoiceRepository.softDelete(id,"deleted");
+                return this.listInvoices();
+
+            }else{
+                return responseAPI(null, "No Invoice found", HttpStatus.NOT_FOUND);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }

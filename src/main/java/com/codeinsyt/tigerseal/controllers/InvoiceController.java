@@ -44,6 +44,7 @@ public class InvoiceController  {
     }
 
 
+
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteInvoice(@PathVariable("id") Long id){
         return new ResponseEntity<>(this.invoiceService.softDelete(id), HttpStatus.OK);

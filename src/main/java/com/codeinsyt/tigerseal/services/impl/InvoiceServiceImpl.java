@@ -42,7 +42,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             Invoice invoice = new Invoice();
             invoice.setNotes(invoiceDTO.getNotes());
-            invoice.setPrice(invoiceDTO.getPrice());
+            invoice.setAmount(invoiceDTO.getAmount());
             invoice.setProperty(this.propertyRepository.findById(invoiceDTO.getPropertyId()).get());
             invoice.setStat(invoiceDTO.getStat());
 
@@ -79,7 +79,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 Invoice invoice = new Invoice();
                 invoice.setId(invoiceDTO.getInvoiceId());
                 invoice.setNotes(invoiceDTO.getNotes());
-                invoice.setPrice(invoiceDTO.getPrice());
+                invoice.setAmount(invoiceDTO.getAmount());
                 invoice.setProperty(this.propertyRepository.findById(invoiceDTO.getPropertyId()).get());
                 invoice.setStat(invoiceDTO.getStat());
 

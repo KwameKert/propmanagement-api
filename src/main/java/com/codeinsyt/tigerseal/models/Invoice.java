@@ -19,9 +19,13 @@ public class Invoice {
     @JsonIgnore
     private Property property;
 
-    private int price;
+    private double amount;
 
     private String stat;
+
+    private Date dateDue;
+
+    private Date billDate;
 
     @Lob
     private String notes;
@@ -54,12 +58,12 @@ public class Invoice {
         this.property = property;
     }
 
-    public int getPrice() {
-        return price;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public String getNotes() {
@@ -86,6 +90,21 @@ public class Invoice {
         this.updatedAt = updatedAt;
     }
 
+    public Date getDateDue() {
+        return dateDue;
+    }
+
+    public void setDateDue(Date dateDue) {
+        this.dateDue = dateDue;
+    }
+
+    public Date getBillDate() {
+        return billDate;
+    }
+
+    public void setBillDate(Date billDate) {
+        this.billDate = billDate;
+    }
 
     public String getStat() {
         return stat;
@@ -100,7 +119,7 @@ public class Invoice {
         return "Invoice{" +
                 "id=" + id +
                 ", property=" + property +
-                ", price=" + price +
+                ", amount=" + amount +
                 ", notes='" + notes + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

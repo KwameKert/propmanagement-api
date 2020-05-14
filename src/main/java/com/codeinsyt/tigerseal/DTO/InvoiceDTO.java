@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import java.util.Date;
 
 public class InvoiceDTO {
 
@@ -15,10 +16,13 @@ public class InvoiceDTO {
 
     private Long propertyId;
 
-    private int price;
+    private double amount;
 
     private String stat = "Unpaid";
 
+    private Date dateDue;
+
+    private Date billDate;
 
     @Lob
     private String notes;
@@ -47,12 +51,12 @@ public class InvoiceDTO {
         this.propertyId = propertyId;
     }
 
-    public int getPrice() {
-        return price;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public String getStat() {
@@ -61,5 +65,21 @@ public class InvoiceDTO {
 
     public void setStat(String stat) {
         this.stat = stat;
+    }
+
+    public Date getDateDue() {
+        return dateDue;
+    }
+
+    public void setDateDue(Date dateDue) {
+        this.dateDue = dateDue;
+    }
+
+    public Date getBillDate() {
+        return billDate;
+    }
+
+    public void setBillDate(Date billDate) {
+        this.billDate = billDate;
     }
 }

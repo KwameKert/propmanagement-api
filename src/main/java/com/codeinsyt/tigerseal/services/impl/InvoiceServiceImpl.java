@@ -3,6 +3,11 @@ package com.codeinsyt.tigerseal.services.impl;
 import com.codeinsyt.tigerseal.DTO.InvoiceDTO;
 import com.codeinsyt.tigerseal.models.Invoice;
 import com.codeinsyt.tigerseal.models.Property;
+
+import com.codeinsyt.tigerseal.models.User;
+import com.codeinsyt.tigerseal.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import com.codeinsyt.tigerseal.repositories.InvoiceRepository;
 import com.codeinsyt.tigerseal.repositories.PropertyRepository;
 import com.codeinsyt.tigerseal.services.interfaces.InvoiceService;
@@ -10,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -19,11 +26,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     private InvoiceRepository invoiceRepository;
     private PropertyRepository propertyRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, PropertyRepository propertyRepository) {
+    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, PropertyRepository propertyRepository, UserRepository userRepository) {
         this.invoiceRepository = invoiceRepository;
         this.propertyRepository = propertyRepository;
+        this.userRepository = userRepository;
     }
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
@@ -190,5 +199,39 @@ public class InvoiceServiceImpl implements InvoiceService {
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
+    }
+
+    @Override
+    public HashMap<String, Object> getMyInvoices() {
+
+        try{
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            AuthDetailsImpl  authDetails = (AuthDetailsImpl) auth.getPrincipal();
+            Long userId = authDetails.getUser().getId();
+
+            Optional<User> owner = this.userRepository.findById(userId);
+            List<Property> properties = owner.get().getProperties();
+            ArrayList<Invoice> invoiceArrayList = new ArrayList<Invoice>();
+
+            for(int i =0; i < properties.size(); i++){
+
+                for(Invoice invoice: properties.get(i).getInvoices()) {
+                    invoiceArrayList.add(invoice);
+                }
+            }
+
+            if(invoiceArrayList.isEmpty()){
+                return responseAPI(null, "No invoices found", HttpStatus.OK);
+            }else{
+                return responseAPI(invoiceArrayList,"Invoices found", HttpStatus.OK);
+
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
+     //   return null;
     }
 }

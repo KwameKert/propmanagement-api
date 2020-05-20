@@ -5,6 +5,8 @@ import com.codeinsyt.tigerseal.services.interfaces.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,6 +38,13 @@ public class InvoiceController  {
     @GetMapping
     public ResponseEntity<?> listInvoice(){
         return new ResponseEntity<>(this.invoiceService.listInvoices(), HttpStatus.OK);
+    }
+
+
+    @GetMapping("owner")
+    public ResponseEntity<?> myInvoices(){
+        System.out.println("Im here");
+        return new ResponseEntity<>(this.invoiceService.getMyInvoices(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")

@@ -10,6 +10,8 @@ public class TransactionDTO {
 
     private Long invoiceId;
 
+    private Long userId;
+
 
     public TransactionDTO() {
     }
@@ -24,6 +26,14 @@ public class TransactionDTO {
 
     public double getAmount() {
         return amount;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setAmount(double amount) {

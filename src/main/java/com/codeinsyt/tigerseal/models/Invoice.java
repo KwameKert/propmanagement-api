@@ -138,6 +138,18 @@ public class Invoice {
         this.stat = stat;
     }
 
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    public void setPropertyNo(String propertyNo) {
+        this.propertyNo = propertyNo;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +

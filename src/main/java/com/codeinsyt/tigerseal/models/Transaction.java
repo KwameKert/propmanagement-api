@@ -25,6 +25,7 @@ public class Transaction {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "invoice_id", nullable = false)
+    @JsonIgnore
     private Invoice invoice;
 
 

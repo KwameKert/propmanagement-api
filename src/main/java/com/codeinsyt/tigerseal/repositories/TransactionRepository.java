@@ -13,7 +13,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
         @Query("SELECT SUM(t.amount) FROM Transaction t")
         double sumAmount();
 
-        @Query("SELECT MONTH(t.createdAt),SUM(amount) FROM Transaction t GROUP BY MONTH(t.createdAt)")
+        @Query("SELECT MONTH(t.createdAt),SUM(amount) FROM Transaction t GROUP BY MONTH(t.createdAt) ORDER BY MONTH(t.createdAt) ASC")
         List<?> monthlyTransaction();
 
 }

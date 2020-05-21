@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="app_invoices")
@@ -20,6 +21,11 @@ public class Invoice {
     private Property property;
 
     private String invoiceId;
+
+
+    @OneToOne(mappedBy = "invoice", cascade = CascadeType.ALL)
+    private Transaction transaction;
+
 
     private double amount;
 

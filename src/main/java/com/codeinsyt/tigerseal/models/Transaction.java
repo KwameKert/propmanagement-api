@@ -2,9 +2,11 @@ package com.codeinsyt.tigerseal.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="app_transaction")
@@ -14,27 +16,24 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private int value;
+    private double amount;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="property_id", nullable= false)
-    @JsonIgnore
-    private Property property;
+    private String method;
 
-    private String stat;
+    @OneToOne
+    @MapsId
+    private Invoice invoice;
 
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
 
-    @CreationTimestamp
+    @UpdateTimestamp
     private Date updatedAt;
 
 
-    public Transaction(Long id) {
-        this.id = id;
+    public Transaction() {
     }
-
 
     public Long getId() {
         return id;
@@ -44,20 +43,28 @@ public class Transaction {
         this.id = id;
     }
 
-    public int getValue() {
-        return value;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public Property getProperty() {
-        return property;
+    public String getMethod() {
+        return method;
     }
 
-    public void setProperty(Property property) {
-        this.property = property;
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     public Date getCreatedAt() {
@@ -75,25 +82,4 @@ public class Transaction {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    public String getStat() {
-        return stat;
-    }
-
-    public void setStat(String stat) {
-        this.stat = stat;
-    }
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", value=" + value +
-                ", property=" + property +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
-
-
 }

@@ -20,6 +20,8 @@ public class Transaction {
 
     private String method;
 
+    private Long userId;
+
     @OneToOne
     @MapsId
     private Invoice invoice;
@@ -69,6 +71,14 @@ public class Transaction {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setCreatedAt(Date createdAt) {

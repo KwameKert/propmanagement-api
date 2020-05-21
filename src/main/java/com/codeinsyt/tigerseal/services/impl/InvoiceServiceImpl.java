@@ -61,6 +61,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoice.setStat(invoiceDTO.getStat());
             Invoice newInvoice = this.invoiceRepository.save(invoice);
 
+
+
             return responseAPI(newInvoice, "Invoice generated ", HttpStatus.OK);
 
 

@@ -54,6 +54,9 @@ public class TransactionServiceImpl  implements TransactionService {
             System.out.println(transaction);
             Transaction newTransaction = this.transactionRepository.save(transaction);
 
+            //updating invoice status
+            this.invoiceRepository.updateStatus(transactionDTO.getInvoiceId(), "Paid");
+
 
 
             return responseAPI(newTransaction, "Transaction added successfully", HttpStatus.OK);

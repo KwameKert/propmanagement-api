@@ -18,4 +18,9 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     int softDelete(Long id, String status);
 
     List<Invoice> findAllByStatNotOrderByIdAsc(String status);
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE Invoice i set i.stat = ?2 where i.id = ?1")
+    @Transactional
+    int updateStatus(Long id, String status);
 }

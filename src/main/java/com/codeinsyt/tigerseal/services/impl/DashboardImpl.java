@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class DashboardImpl implements DashboardService {
@@ -47,12 +48,14 @@ public class DashboardImpl implements DashboardService {
            int propertyCount = this.propertyRepository.findAllByStatNotOrderByIdAsc("deleted").size();
            int transactionCount = this.transactionRepository.findAll().size();
            double revenue = this.transactionRepository.sumAmount();
+           List<?> monthlyTransaction = this.transactionRepository.monthlyTransaction();
 
            HashMap<String, Object> response = new HashMap<>();
            response.put("user", userCount);
            response.put("property", propertyCount);
            response.put("transaction", transactionCount);
            response.put("revenue", revenue);
+           response.put("month", monthlyTransaction);
 
            return responseAPI(response,"Dashboard components",HttpStatus.OK );
 

@@ -23,8 +23,11 @@ public class Invoice {
     private String invoiceId;
 
 
-    @OneToOne(mappedBy = "invoice", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "invoice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Transaction transaction;
+
+
+
 
 
     private double amount;

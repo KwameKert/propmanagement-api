@@ -22,9 +22,11 @@ public class Transaction {
 
     private Long userId;
 
-    @OneToOne
-    @MapsId
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "invoice_id", nullable = false)
     private Invoice invoice;
+
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -91,5 +93,18 @@ public class Transaction {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", method='" + method + '\'' +
+                ", userId=" + userId +
+                ", invoice=" + invoice +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

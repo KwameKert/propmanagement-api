@@ -2,6 +2,7 @@ package com.codeinsyt.tigerseal.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,6 +32,7 @@ public class Property {
     private Double latitude;
 
     private Double longitude;
+
 
     private int value;
 

@@ -51,7 +51,10 @@ public class TransactionServiceImpl  implements TransactionService {
             transaction.setMethod(transactionDTO.getMethod());
             transaction.setUserId(transactionDTO.getUserId());
 
+            System.out.println(transaction);
             Transaction newTransaction = this.transactionRepository.save(transaction);
+
+
 
             return responseAPI(newTransaction, "Transaction added successfully", HttpStatus.OK);
 

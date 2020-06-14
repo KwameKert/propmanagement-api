@@ -1,2 +1,2 @@
 # tigerSeal
-This is a springboot broiler template with spring secuirty integrated. JWT is implemented in this project as well. 
+This is a springboot broiler template with spring secuirty integrated. This proeject uses JWT authentication. 
